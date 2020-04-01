@@ -29,13 +29,11 @@ void bfs() {
             if (d == 3) d = 0;
             else d += 1;
         }
-
-
+        
         if (xx + dirx[d] == 0 || yy + diry[d] == 0 || xx + dirx[d] > n || yy + diry[d] > n) {
             sec++;
             return;
         }
-
 
         if (map[xx + dirx[d]][yy + diry[d]] == 1) {
             sec++;
@@ -73,24 +71,9 @@ int main() {
         if (c == 'D') direct[a] = 4;
         else direct[a] = 3;
     }
-
-    for (i = 1; i <= n; i++) {
-        for (j = 1; j <= n; j++) {
-            //printf("%d",map[i][j]);
-        }
-        //printf("\n");
-    }
-
-
-
+    
     bfs();
+    
     printf("%d\n", sec);
-
-    for (i = 1; i <= n; i++) {
-        for (j = 1; j <= n; j++) {
-            //printf("%d",map[i][j]);
-        }
-        //printf("\n");
-    }
 
 }
