@@ -12,7 +12,7 @@ point start;
 int visit[MAX][MAX];
 int fish[7];
 
-int dirx[4] = { -1, 0, 0, 1 };	//ºÏ ¼­ µ¿ ³²
+int dirx[4] = { -1, 0, 0, 1 };	//ë¶ ì„œ ë™ ë‚¨
 int diry[4] = { 0, -1, 1, 0 };
 int shark_size = 2, xp= 0;
 int cnt;
@@ -59,7 +59,7 @@ void inputData()
 int isFishLeft()
 {
 	int i;
-	//¾Æ±â»ó¾îº¸´Ù ÀÛÀº ¹°°í±â ³²¾ÒÀ¸¸é 1
+	//ì•„ê¸°ìƒì–´ë³´ë‹¤ ì‘ì€ ë¬¼ê³ ê¸° ë‚¨ì•˜ìœ¼ë©´ 1
 	for (i = 1; i < shark_size; i++)
 	{
 		if (fish[i]) break;
@@ -97,7 +97,7 @@ int moveShark(point start)
 			fish[map[temp.x][temp.y]]--;
 			map[temp.x][temp.y] = 0;
 			sol = temp.cnt;
-			clear(); visit[temp.x][temp.y] = temp.cnt;	//ÇöÀç À§Ä¡ Á¦¿Ü visit ÃÊ±âÈ­
+			clear(); visit[temp.x][temp.y] = temp.cnt;	//í˜„ì¬ ìœ„ì¹˜ ì œì™¸ visit ì´ˆê¸°í™”
 			sizeup();
 			if (!isFishLeft()) return sol;
 			temp.cnt = 0;
@@ -119,7 +119,7 @@ int moveShark(point start)
 			visit[next.x][next.y] = cnt;
 			if (map[nextx][nexty] && map[nextx][nexty] < shark_size)
 			{
-				//¸ÔÀ» ¼ö ÀÖ´Â ¹°°í±â¸¦ ¸¸³µÀ» ¶§
+				//ë¨¹ì„ ìˆ˜ ìˆëŠ” ë¬¼ê³ ê¸°ë¥¼ ë§Œë‚¬ì„ ë•Œ
 				if (!temp.cnt)
 				{
 					temp.cnt = cnt;
