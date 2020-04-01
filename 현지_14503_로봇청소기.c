@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 
-/*½Ã°èÁÂÇ¥*/
+/*ì‹œê³„ì¢Œí‘œ*/
 #if 0
 #include <stdio.h>
 #define MAX 60
@@ -9,8 +9,8 @@ int n, m;
 int cnt;
 int map[MAX][MAX];
 int visited[MAX][MAX];
-int dirx[4] = { 0,-1,0,1 };	//¿Þ À§ ¿À ¾Æ
-int diry[4] = { -1,0,1,0 };	//¿Þ À§ ¿À ¾Æ
+int dirx[4] = { 0,-1,0,1 };	//ì™¼ ìœ„ ì˜¤ ì•„
+int diry[4] = { -1,0,1,0 };	//ì™¼ ìœ„ ì˜¤ ì•„
 int dir;
 typedef struct st
 {
@@ -28,8 +28,8 @@ void dfs(int x, int y, int dir)
 	int i;
 	for (i = 0; i < 4; i++)
 	{
-		//dir : ¿Þ À§ ¿À ¾Æ
-		//¿Þ ¾Æ·¡ ¿À À§ (0 3 2 1 )¼øÀ¸·Î µ¹¾Æ¾ßÇÑ´Ù.
+		//dir : ì™¼ ìœ„ ì˜¤ ì•„
+		//ì™¼ ì•„ëž˜ ì˜¤ ìœ„ (0 3 2 1 )ìˆœìœ¼ë¡œ ëŒì•„ì•¼í•œë‹¤.
 		int nextd = dir - i;
 		if (nextd < 0) nextd += 4;
 		nextx = dirx[nextd] + x;
@@ -46,7 +46,7 @@ void dfs(int x, int y, int dir)
 
 	if (i == 4)
 	{
-		//dir : ¿Þ À§ ¿À ¾Æ
+		//dir : ì™¼ ìœ„ ì˜¤ ì•„
 		nextd = dir - 1;
 		if (nextd == -1) nextd = 3;
 		nextx = x + dirx[nextd];
@@ -85,7 +85,7 @@ int main()
 
 
 
-/*¹Ý½Ã°èÁÂÇ¥*/
+/*ë°˜ì‹œê³„ì¢Œí‘œ*/
 #if 0
 #include <stdio.h>
 #define MAX 60
@@ -93,8 +93,8 @@ int n, m;
 int cnt;
 int map[MAX][MAX];
 int visited[MAX][MAX];
-int dirx[4] = { 0,1,0,-1 };	//¿Þ ¾Æ ¿À À§
-int diry[4] = { -1,0,1,0 };	//¿Þ ¾Æ ¿À À§
+int dirx[4] = { 0,1,0,-1 };	//ì™¼ ì•„ ì˜¤ ìœ„
+int diry[4] = { -1,0,1,0 };	//ì™¼ ì•„ ì˜¤ ìœ„
 int dir;
 
 typedef struct st
@@ -112,8 +112,8 @@ void dfs(int x, int y, int dir)
 	int i;
 	for (i = 0; i < 4; i++)
 	{
-		//dir : ¿Þ ¾Æ ¿À À§
-		//¿Þ ¾Æ·¡ ¿À À§ (0 1 2 3)¼øÀ¸·Î µ¹¾Æ¾ßÇÑ´Ù.
+		//dir : ì™¼ ì•„ ì˜¤ ìœ„
+		//ì™¼ ì•„ëž˜ ì˜¤ ìœ„ (0 1 2 3)ìˆœìœ¼ë¡œ ëŒì•„ì•¼í•œë‹¤.
 		nextd = (dir + i) % 4;
 		nextx = dirx[nextd] + x;	nexty = diry[nextd] + y;
 		if (nextd % 2 && (nextx < 0 || nextx >= n)) continue;
@@ -127,7 +127,7 @@ void dfs(int x, int y, int dir)
 
 	if (i == 4)
 	{
-		//dir : ¿Þ ¾Æ ¿À À§
+		//dir : ì™¼ ì•„ ì˜¤ ìœ„
 		int nextd = (dir + 1) % 4;
 		int nextx = x + dirx[nextd];
 		int nexty = y + diry[nextd];
