@@ -4,8 +4,8 @@ int n, m,idx,cnt,min = 100000000,total,brk,pin;
 int map[55][55];
 int num[55][55];
 int visit[55][55];
-int virus[11][2];
-int queue[1001000][2];
+int virus[11][3];
+int queue[1001000][4];
 int dirx[4] = { 0,1,0,-1 };
 int diry[4] = { 1,0,-1,0 };
 
@@ -30,7 +30,7 @@ void clr() {
 }
 
 void bfs() {
-	int i, j, zz, flag=0, read = 0, write = 0,max = 0;
+	int i,j,read = 0, write = 0,max = 0;
 
 	for (i = 0; i < 10; i++) {
 		if (virus[i][2] == 1) {
@@ -46,22 +46,14 @@ void bfs() {
 		
 		for (i = 0; i < 4; i++) {
 			if (xx + dirx[i] < 0 || xx + dirx[i] >= n || yy + diry[i] < 0 || yy + diry[i] >= n) continue;
-			
-			if (map[xx + dirx[i]][yy + diry[i]] == 2 && visit[xx + dirx[i]][yy + diry[i]] == 0) {
-				visit[xx + dirx[i]][yy + diry[i]]++;
-				queue[write][0] = xx + dirx[i];
-				queue[write++][1] = yy + diry[i];
-				num[xx + dirx[i]][yy + diry[i]] = num[xx][yy] + 1;
-			}
 
-			if (map[xx + dirx[i]][yy + diry[i]] == 0 && visit[xx + dirx[i]][yy + diry[i]] == 0) {
-				brk++;
+			if ((map[xx + dirx[i]][yy + diry[i]] == 0 || map[xx + dirx[i]][yy + diry[i]] == 2)&& visit[xx + dirx[i]][yy + diry[i]] == 0) {
+				if(map[xx + dirx[i]][yy + diry[i]] == 0) brk++;
+                		queue[write][0] = xx + dirx[i];
+				queue[write++][1] = yy + diry[i];
 				visit[xx + dirx[i]][yy + diry[i]]++;
 				num[xx + dirx[i]][yy + diry[i]]= num[xx][yy]+1;
-				queue[write][0] = xx + dirx[i];
-				queue[write++][1] = yy + diry[i];
 			}
-
 			if (brk == total) {
 				pin++;
 				break;
@@ -69,18 +61,19 @@ void bfs() {
 		}
 		if (pin) break;
 	}
-	flag = check();
+
 	for (i = 0; i < n; i++) {
 		for (j = 0; j < n; j++) {
 			if (max < num[i][j]) max = num[i][j];
 		}
 	}
 
-	if (min > max && flag == 1) min = max;
+	if (min > max && check()) min = max;
 
 	clr();
 	pin = brk = 0;
 }
+
 
 void dfs(int sta){
 	int i;
@@ -119,5 +112,4 @@ int main() {
 	}
 	if (min == 100000000) printf("-1");
 	else printf("%d", min);
-
 }
