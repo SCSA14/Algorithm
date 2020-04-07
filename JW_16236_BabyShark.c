@@ -37,10 +37,14 @@ void bfs(int x, int y) {
 			}
 		}
 	}
+	// SUM UP 
 	for (i = 0; i < write; i++) {
 		sum += map[queue[i][0]][queue[i][1]];
 	}
+	//GETTING AVERAGE 
 	sum = sum / cnt;
+	
+	//PUT IT ON THE MAP
 	for (i = 0; i < write; i++) {
 		map[queue[i][0]][queue[i][1]] = sum;
 	}
@@ -57,6 +61,7 @@ int main() {
 		int cnt = 0;
 		for (i = 0; i < N; i++) {
 			for (j = 0; j < N; j++) {
+				// PASS IF VISITED
 				if (visit[i][j] == 1) continue;
 				cnt++;
 				bfs(i, j);
@@ -64,6 +69,7 @@ int main() {
 		}
 		clr();
 		if (cnt == N * N) break;
+		// +1 MOVE
 		move++;
 		
 	}
