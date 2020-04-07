@@ -57,7 +57,7 @@ int solve()
 
 		clear();
 
-		//¿¬ÇÕ
+		//union
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < n; j++)
 				if (!pop[i][j])
@@ -68,7 +68,7 @@ int solve()
 				}
 
 
-		//ÀÌµ¿
+		//move
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < n; j++)
 			{
