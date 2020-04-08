@@ -58,9 +58,9 @@ void DFS(int x, int cnt) {
 			tmpCnt[x][i][j] = timeCnt[i][j];
 		}
 	}
-	BFS(virus[x], virus[x + 1]); // BFS´Â ÁÂÇ¥ °ªÀ» ³Ñ°ÜÁÜ
+	BFS(virus[x], virus[x + 1]); // BFSëŠ” ì¢Œí‘œ ê°’ì„ ë„˜ê²¨ì¤Œ
 	isactive[virus[x]][virus[x + 1]] = 1;
-	DFS(x + 2, cnt + 1); //DFS´Â ÀÎµ¦½º°ª
+	DFS(x + 2, cnt + 1); //DFSëŠ” ì¸ë±ìŠ¤ê°’
 	
 	if (x > idx) return;
 	for (int i = 0; i < N; i++) {
