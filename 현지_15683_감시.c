@@ -107,7 +107,7 @@ void runCCTV(int idx, int type, int dir)
 			runCCTV(idx, 1,(dir + 2) % 4);
 			break;
 		case 3:
-			//³² ¼­ ºÏ µ¿
+			//Â³Â² Â¼Â­ ÂºÃ ÂµÂ¿
 			runCCTV(idx, 1, dir);
 			runCCTV(idx, 1, (dir + 1) % 4);
 			break;
