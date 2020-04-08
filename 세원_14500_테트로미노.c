@@ -1,4 +1,3 @@
-#if 0
 #include <stdio.h>
 int n, m, sum, max = -1, originX, originY;
 int map[501][501];
@@ -91,4 +90,3 @@ int main() {
 	printf("%d\n", max);
 	return 0;
 }
-#endif
