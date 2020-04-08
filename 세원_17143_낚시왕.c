@@ -2,12 +2,12 @@
 #include<stdlib.h>
 int R, C, M, sol;
 struct shark {
-    int r; //Çà
-    int c; //¿­
-    int s; //¼Ó·Â
-    int d; //ÀÌµ¿¹æÇâ
-    int z; //Å©±â
-    int isdied; //»ı»ç ¿©ºÎ
+    int r; //í–‰
+    int c; //ì—´
+    int s; //ì†ë ¥
+    int d; //ì´ë™ë°©í–¥
+    int z; //í¬ê¸°
+    int isdied; //ìƒì‚¬ ì—¬ë¶€
 }sharks[10100];
 int map[101][101];
 int personL = 0;
