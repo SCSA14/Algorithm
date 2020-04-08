@@ -75,7 +75,7 @@ int main() {
 #endif
 
 
-//ÈñÁ¦²¨
+//ÃˆÃ±ÃÂ¦Â²Â¨
 #if 0
 
 #include <stdio.h>
