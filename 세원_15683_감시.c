@@ -4,9 +4,9 @@ int office[10][10];
 int tmp[8][10][10];
 int visitD[10][4];
 int cctvXY[10][2];
-int dirx[5] = { 0, 1, -1, 0, 0 }; // ¾Æ·¡ À§ ¿À¸¥ÂÊ ¿ŞÂÊ
+int dirx[5] = { 0, 1, -1, 0, 0 }; // ì•„ë˜ ìœ„ ì˜¤ë¥¸ìª½ ì™¼ìª½
 int diry[5] = { 0, 0, 0, 1, -1 }; // 0    1   2    3 // k
-int check() { //»ç°¢Áö´ë(0) ¼¼±â
+int check() { //ì‚¬ê°ì§€ëŒ€(0) ì„¸ê¸°
 	int cnt = 0;
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
@@ -15,7 +15,7 @@ int check() { //»ç°¢Áö´ë(0) ¼¼±â
 	}
 	return cnt;
 }
-void setCCTV(int idx, int k) { //¾¾¾¾Æ¼ºñ·Î È®ÀÎ °¡´ÉÇÑ °÷À» -1·Î »öÄ¥
+void setCCTV(int idx, int k) { //ì”¨ì”¨í‹°ë¹„ë¡œ í™•ì¸ ê°€ëŠ¥í•œ ê³³ì„ -1ë¡œ ìƒ‰ì¹ 
 	int newx = cctvXY[idx][0];
 	int newy = cctvXY[idx][1];
 	while (1) {
@@ -26,7 +26,7 @@ void setCCTV(int idx, int k) { //¾¾¾¾Æ¼ºñ·Î È®ÀÎ °¡´ÉÇÑ °÷À» -1·Î »öÄ¥
 		else if (office[newx][newy] == 6) break;
 	}
 }
-void setDir(int idx, int cnt) { //°¢ ¾¾¾¾Æ¼ºñÀÇ ¹æÇâ ¼³Á¤, ¹éÆ®·¡Å·À» ÀÌ¿ëÇØ ´Ù½Ã ÃÊ±âÈ­ ÈÄ ´Ù¸¥ ¹æÇâÀ¸·Î ¼³Á¤. 
+void setDir(int idx, int cnt) { //ê° ì”¨ì”¨í‹°ë¹„ì˜ ë°©í–¥ ì„¤ì •, ë°±íŠ¸ë˜í‚¹ì„ ì´ìš©í•´ ë‹¤ì‹œ ì´ˆê¸°í™” í›„ ë‹¤ë¥¸ ë°©í–¥ìœ¼ë¡œ ì„¤ì •. 
 	if (cnt == cctvNum) {
 		int result = check();
 		if (min > result) min = result;
@@ -89,7 +89,7 @@ void setDir(int idx, int cnt) { //°¢ ¾¾¾¾Æ¼ºñÀÇ ¹æÇâ ¼³Á¤, ¹éÆ®·¡Å·À» ÀÌ¿ëÇØ ´Ù½
 		}
 	}
 	else if (k == 3) {
-		setCCTV(idx, 1); // ¾Æ·¡ ¿ŞÂÊ
+		setCCTV(idx, 1); // ì•„ë˜ ì™¼ìª½
 		setCCTV(idx, 4);
 		setDir(idx + 1, cnt + 1);
 		for (int i = 0; i < N; i++) {
@@ -98,7 +98,7 @@ void setDir(int idx, int cnt) { //°¢ ¾¾¾¾Æ¼ºñÀÇ ¹æÇâ ¼³Á¤, ¹éÆ®·¡Å·À» ÀÌ¿ëÇØ ´Ù½
 			}
 		}
 
-		setCCTV(idx, 2); // À§ ¿À¸¥ÂÊ
+		setCCTV(idx, 2); // ìœ„ ì˜¤ë¥¸ìª½
 		setCCTV(idx, 3);
 		setDir(idx + 1, cnt + 1);
 		for (int i = 0; i < N; i++) {
@@ -107,7 +107,7 @@ void setDir(int idx, int cnt) { //°¢ ¾¾¾¾Æ¼ºñÀÇ ¹æÇâ ¼³Á¤, ¹éÆ®·¡Å·À» ÀÌ¿ëÇØ ´Ù½
 			}
 		}
 
-		setCCTV(idx, 3); // ¿À¸¥ÂÊ ¾Æ·¡
+		setCCTV(idx, 3); // ì˜¤ë¥¸ìª½ ì•„ë˜
 		setCCTV(idx, 1);
 		setDir(idx + 1, cnt + 1);
 		for (int i = 0; i < N; i++) {
@@ -115,7 +115,7 @@ void setDir(int idx, int cnt) { //°¢ ¾¾¾¾Æ¼ºñÀÇ ¹æÇâ ¼³Á¤, ¹éÆ®·¡Å·À» ÀÌ¿ëÇØ ´Ù½
 				office[i][j] = tmp[cnt][i][j];
 			}
 		}
-		setCCTV(idx, 4); // ¿ŞÂÊ À§
+		setCCTV(idx, 4); // ì™¼ìª½ ìœ„
 		setCCTV(idx, 2);
 		setDir(idx + 1, cnt + 1);
 		for (int i = 0; i < N; i++) {
@@ -125,7 +125,7 @@ void setDir(int idx, int cnt) { //°¢ ¾¾¾¾Æ¼ºñÀÇ ¹æÇâ ¼³Á¤, ¹éÆ®·¡Å·À» ÀÌ¿ëÇØ ´Ù½
 		}
 	}
 	else if (k == 4) {
-		setCCTV(idx, 1); // ¾Æ·¡ ¿ŞÂÊ ¿À¸¥ÂÊ
+		setCCTV(idx, 1); // ì•„ë˜ ì™¼ìª½ ì˜¤ë¥¸ìª½
 		setCCTV(idx, 4);
 		setCCTV(idx, 3);
 		setDir(idx + 1, cnt + 1);
@@ -135,7 +135,7 @@ void setDir(int idx, int cnt) { //°¢ ¾¾¾¾Æ¼ºñÀÇ ¹æÇâ ¼³Á¤, ¹éÆ®·¡Å·À» ÀÌ¿ëÇØ ´Ù½
 			}
 		}
 
-		setCCTV(idx, 2); // À§ ¿À¸¥ÂÊ ¿ŞÂÊ
+		setCCTV(idx, 2); // ìœ„ ì˜¤ë¥¸ìª½ ì™¼ìª½
 		setCCTV(idx, 3);
 		setCCTV(idx, 4);
 		setDir(idx + 1, cnt + 1);
@@ -145,7 +145,7 @@ void setDir(int idx, int cnt) { //°¢ ¾¾¾¾Æ¼ºñÀÇ ¹æÇâ ¼³Á¤, ¹éÆ®·¡Å·À» ÀÌ¿ëÇØ ´Ù½
 			}
 		}
 
-		setCCTV(idx, 3); // ¿À¸¥ÂÊ ¾Æ·¡ À§
+		setCCTV(idx, 3); // ì˜¤ë¥¸ìª½ ì•„ë˜ ìœ„
 		setCCTV(idx, 1);
 		setCCTV(idx, 2);
 		setDir(idx + 1, cnt + 1);
@@ -154,7 +154,7 @@ void setDir(int idx, int cnt) { //°¢ ¾¾¾¾Æ¼ºñÀÇ ¹æÇâ ¼³Á¤, ¹éÆ®·¡Å·À» ÀÌ¿ëÇØ ´Ù½
 				office[i][j] = tmp[cnt][i][j];
 			}
 		}
-		setCCTV(idx, 4); // ¿ŞÂÊ À§ ¾Æ·¡
+		setCCTV(idx, 4); // ì™¼ìª½ ìœ„ ì•„ë˜
 		setCCTV(idx, 2);
 		setCCTV(idx, 1);
 		setDir(idx + 1, cnt + 1);
@@ -186,7 +186,7 @@ int main() {
 			scanf("%d", &office[i][j]);
 			if (office[i][j] != 0 && office[i][j] != 6) {
 				cctvXY[idx][0] = i;
-				cctvXY[idx++][1] = j; //¾¾¾¾Æ¼ºñ ÁÂÇ¥ Á¤º¸ ÀúÀå
+				cctvXY[idx++][1] = j; //ì”¨ì”¨í‹°ë¹„ ì¢Œí‘œ ì •ë³´ ì €ì¥
 			}
 		}
 	}
