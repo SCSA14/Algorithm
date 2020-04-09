@@ -1,0 +1,98 @@
+#include <stdio.h>
+
+int x, k, cnt, flag;
+
+int map[15][15];
+int queue[15][15][100];
+int tq[100];
+int dirx[5] = { 0, 0,0,-1,1 };
+int diry[5] = { 0, 1,-1,0,0 };
+
+struct st {
+	int x;
+	int y;
+	int d;
+}pair[15];
+
+void mv(int a, int b, int c, int d, int n, int rev) {
+	int i, j, idx, st, m, pin, sta, end;
+	for (i = 1; i <= k; i++) {
+		if (queue[a][b][i] == n) { // 1 2 3  ->  2 3
+			for (j = 1; j <= k; j++) {
+				if (queue[c][d][j] == 0) break;
+			}
+
+			st = j; // 앞으로 갈 위치의 스택
+			idx = i; // 그전의 위치 스택
+			for (j = st; j <= k; j++) {
+				;
+				queue[c][d][j] = queue[a][b][idx];
+				queue[a][b][idx++] = 0;
+				if (queue[a][b][idx] == 0) break;
+			}
+			//if (k < j) j--;
+			sta = st;
+			end = j;
+			if (rev == 1) {
+				idx = st;
+				pin = j;
+				for (m = j; m >= st; m--) {
+					tq[idx++] = queue[c][d][m];
+				}
+				m++;
+				for (j = m; j <= pin; j++) {
+					queue[c][d][j] = tq[j];
+				}
+			}
+			for (j = sta; j <= end; j++) {
+				int ab = queue[c][d][j];
+				pair[ab].x = c;
+				pair[ab].y = d;
+			}
+			if (end >= 4) flag++;
+			return;
+		}
+	}
+}
+
+int main() {
+	int i, j;
+	scanf("%d %d", &x, &k);
+
+	for (i = 1; i <= x; i++) {
+		for (j = 1; j <= x; j++) {
+			scanf("%d", &map[i][j]);
+		}
+	}
+	for (i = 1; i <= k; i++) {
+		scanf("%d %d %d", &pair[i].x, &pair[i].y, &pair[i].d);
+		queue[pair[i].x][pair[i].y][1] = i;
+	}
+	while (cnt != 1000) {
+		for (i = 1; i <= k; i++) {
+			int xx = pair[i].x;
+			int yy = pair[i].y;
+			int d = pair[i].d;
+			if (map[xx + dirx[d]][yy + diry[d]] == 2 || xx + dirx[d] <= 0 || xx + dirx[d] > x || yy + diry[d] <= 0 || yy + diry[d] > x) {
+				if (d % 2 == 0) pair[i].d--;
+				else pair[i].d++;
+				d = pair[i].d;
+				if (map[xx + dirx[d]][yy + diry[d]] == 2 || xx + dirx[d] <= 0 || xx + dirx[d] > x || yy + diry[d] <= 0 || yy + diry[d] > x) {
+					continue;
+				}
+				else if (map[xx + dirx[d]][yy + diry[d]] <= 1) {
+					mv(xx, yy, xx + dirx[d], yy + diry[d], i, map[xx + dirx[d]][yy + diry[d]]);
+				}
+			}
+			else if (map[xx + dirx[d]][yy + diry[d]] <= 1) {
+				mv(xx, yy, xx + dirx[d], yy + diry[d], i, map[xx + dirx[d]][yy + diry[d]]);
+			}
+		}
+		cnt++;
+		if (flag > 0) break;
+	}
+
+	if (flag > 0) printf("%d", cnt);
+	else printf("-1");
+
+}
