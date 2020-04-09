@@ -1,0 +1,107 @@
+#include <stdio.h>
+int R, C, M, answer;
+
+int speed[11111];
+int direct[11111];
+int size[11111];
+int mv[11111];
+int queue[11111][2];
+
+int dirx[5] = {0,-1,1,0,0};
+int diry[5] = {0,0,0,1,-1};
+// 1은 위 2는 아래 3 오른쪽 4 왼쪽
+int map[111][111];
+int num[111][111];
+int tmp[111][111];
+
+void clr(){
+    int i;
+    for(i=1;i<=M;i++){
+        mv[i] = 0;
+    }
+}
+
+int main() {
+    int i,j,k, a, b;
+    scanf("%d %d %d", &R, &C, &M);
+    for (i = 1; i <=M; i++) {
+        scanf("%d %d %d %d %d", &a, &b, &speed[i], &direct[i], &size[i]);
+        if(direct[i]<=2) speed[i]%=((R-1)*2);
+        else speed[i]%=((C-1)*2);
+        num[a][b] = i;
+        map[a][b] = 2;
+        queue[i][0] = a;
+        queue[i][1] = b;
+    }
+    
+    for (j = 1; j <= C; j++) {
+        int xx, yy, nn;
+        for (i = 1; i <= R; i++) {
+            if (map[i][j] == 2) {
+                nn = num[i][j];
+                answer += size[nn];
+                map[i][j] = 0;
+                num[i][j] = 0;
+                queue[nn][0] = 0;
+                queue[nn][1] = 0;
+                break;
+            }
+        }
+        //상어이동
+        for (i = 1; i <= M; i++) {
+
+            if (queue[i][0] == 0) continue;
+            xx = queue[i][0];
+            yy = queue[i][1];
+            if(num[xx][yy]==i){
+                map[xx][yy] = 0;
+                num[xx][yy] = 0;
+            }
+            mv[i] = 1;
+            
+            for (k = 1; k <= speed[i]; k++) {
+                int d = direct[i];
+                if (xx + dirx[d] <  1) direct[i] = 2;
+                else if (xx + dirx[d] >  R) direct[i] = 1;
+                else if (yy + diry[d] <  1) direct[i] = 3;
+                else if (yy + diry[d] >  C) direct[i] = 4;
+                d = direct[i];
+                xx = xx + dirx[d];
+                yy = yy + diry[d];
+            }
+            
+            tmp[xx][yy] = 2;
+            queue[i][0] = xx;
+            queue[i][1] = yy;
+           
+            // 중복제거
+            int zz = num[xx][yy];
+            
+            if (map[xx][yy] == 2 && tmp[xx][yy] == 2 && mv[zz]==0){
+                num[xx][yy] = i;
+            }
+                
+            else if (map[xx][yy] == 2 && tmp[xx][yy] == 2 && mv[zz]==1) {
+                
+                if (size[zz] < size[i]) {
+                    queue[zz][0] = 0;
+                    queue[zz][1] = 0;
+                    num[xx][yy] = i;
+                }
+                else if (size[zz] > size[i]){
+                    queue[i][0] = 0;
+                    queue[i][1] = 0;
+                }
+            }
+            else{
+                map[xx][yy] = 2;
+                num[xx][yy] = i;
+            }
+            tmp[xx][yy] = 0;
+        }
+        clr();
+    }
+    printf("%d", answer);
+    
+    return 0;
+}
